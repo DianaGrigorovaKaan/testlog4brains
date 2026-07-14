@@ -1,0 +1,27 @@
+name: Publish Log4brains
+on:
+  push:
+    branches: [ main ]
+permissions:
+  contents: write
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # Log4brains needs the full git history
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Build Log4brains
+        run: |
+          npm install -g log4brains
+          log4brains build --basePath /${GITHUB_REPOSITORY#*/}/log4brains
+          touch .log4brains/out/.nojekyll   # stops GitHub Pages from hiding _next files
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: .log4brains/out
+          target-folder: log4brains
