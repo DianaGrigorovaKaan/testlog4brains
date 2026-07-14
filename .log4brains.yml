@@ -1,0 +1,11 @@
+project:
+  name: adr-hub
+  tz: Europe/Copenhagen
+  adrFolder: ./docs/adr
+  packages:
+    - name: crosscutting
+      path: ./crosscutting
+      adrFolder: ./crosscutting/docs/adr
+    - name: projects
+      path: ./projects
+      adrFolder: ./projects/docs/adr
