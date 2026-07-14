@@ -17,11 +17,10 @@ jobs:
       - name: Build Log4brains
         run: |
           npm install -g log4brains
-          log4brains build --basePath /${GITHUB_REPOSITORY#*/}/log4brains
-          touch .log4brains/out/.nojekyll   # stops GitHub Pages from hiding _next files
+          log4brains build --basePath /${GITHUB_REPOSITORY#*/}
+          touch .log4brains/out/.nojekyll
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: .log4brains/out
-          target-folder: log4brains
